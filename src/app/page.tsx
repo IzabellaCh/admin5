@@ -25,7 +25,7 @@ import {
   ABOUT_US_TEXT,
 } from '@/app/home.data';
 import { HOW_WE_WORK } from '@/components/Step/step.data';
-// import { Calculator } from '@/components/Calculator/Calculator';
+import { Calculator } from '@/components/Calculator/Calculator';
 import {
   ALL_ARTICLES,
   TArticleData,
@@ -461,7 +461,7 @@ export default function Home() {
       </Stack>
       <Stack id="calculator">
         <HomeTitle titleData={HOME_TITLES[3]} />
-        {/* <Calculator /> */}
+        <Calculator />
       </Stack>
       <Stack>
         <HomeTitle titleData={HOME_TITLES[4]} />
