@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
-// import { Calculator } from '@/components/Calculator/Calculator';
+import { Calculator } from '@/components/Calculator/Calculator';
 import { ServiceExplanation } from '@/components/ServiceExplanation/ServiceExplanation';
 import { SERVICE_EXPLANATION_DATA } from '@/components/ServiceExplanation/serviceExplanation.data';
 import { FAQ } from '@/components/FAQ/FAQ';
@@ -27,7 +27,7 @@ const Cost = () => {
       >
         Рассчитайте стоимость исходя из своих запросов
       </Typography>
-      {/* <Calculator /> */}
+      <Calculator />
       <Stack
         width="100%"
         sx={{
