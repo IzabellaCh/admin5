@@ -12,7 +12,7 @@ type ArticlesListItemProps = {
 export const ArticlesListItem = ({ article }: ArticlesListItemProps) => {
   return (
     <Link
-      href={`blog/${article.id}`}
+      href={`/blog/${article.id}`}
       width="100%"
       borderBottom="1px solid"
       borderColor="primary.light"

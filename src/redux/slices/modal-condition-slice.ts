@@ -1,23 +1,37 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/redux/index';
 
-const initialState = {
-  data: false,
+export enum EModals {
+  Communication = 'Communication',
+  MobileMenu = 'MobileMenu',
+  ServicesMenu = 'ServicesMenu',
+}
+
+type TModalConditionSlice = {
+  openModal:
+    | EModals.Communication
+    | EModals.MobileMenu
+    | EModals.ServicesMenu
+    | null;
+};
+
+const initialState: TModalConditionSlice = {
+  openModal: null,
 };
 
 const modalConditionSlice = createSlice({
   name: 'modalCondition',
   initialState: initialState,
   reducers: {
-    changeModalCondition: (state, action) => {
-      state.data = action.payload;
+    changeOpenModal: (state, action) => {
+      state.openModal = action.payload;
     },
   },
 });
 
-export const selectIsModalOpen = (state: RootState) =>
-  state.modalCondition.data;
+export const selectOpenModal = (state: RootState) =>
+  state.modalCondition.openModal;
 
-export const { changeModalCondition } = modalConditionSlice.actions;
+export const { changeOpenModal } = modalConditionSlice.actions;
 
 export const modalConditionReducer = modalConditionSlice.reducer;

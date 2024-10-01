@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import Stack, { StackProps } from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 
 import { TFeedbackData } from '@/shared/feedbackData/feedback.data';
 import { selectWindowInnerWidth } from '@/redux/slices/window-inner-width-slice';
@@ -58,7 +58,7 @@ export const Feedback = ({
       <Typography variant="body1" color="secondary.main">
         {feedbackData.text}
       </Typography>
-      <CustonMuiIcon
+      <CustomMuiIcon
         type={
           type === 'left'
             ? 'icon-feedback-triangle-left'

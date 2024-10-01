@@ -1,10 +1,10 @@
 'use client';
 import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { TArticleData } from '@/shared/articlesData/articles.data';
+import { CustomLink } from '@/components/Link/CustomLink';
 
 import defaultImage from '../../../public/assets/icons/about-us-page/image_about_us_second.jpg';
 
@@ -16,7 +16,7 @@ export const ArticleCardFirstType = ({
   articleData,
 }: ArticleCardFirstTypeProps) => {
   return (
-    <Link href={`blog/${articleData.id}`}>
+    <CustomLink href={`/blog/${articleData.id}`}>
       <Stack
         p="16px 14px 30px"
         sx={(theme) => ({
@@ -102,6 +102,6 @@ export const ArticleCardFirstType = ({
           </Typography>
         </Box>
       </Stack>
-    </Link>
+    </CustomLink>
   );
 };

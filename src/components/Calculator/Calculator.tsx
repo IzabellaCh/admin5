@@ -1,23 +1,29 @@
 'use client';
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import Button, { buttonClasses } from '@mui/material/Button';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
-
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomLink } from '@/components/Link/CustomLink';
 import { CalculatorForm } from '../Form/CalculatorForm/CalculatorForm';
 import { TariffType, AllTariffs } from './calculator.data';
 import { Counter } from '../Counter/Counter';
+import { TariffDetales } from './TariffDetales';
+import { CalculatorResult } from './CalculatorResult';
+import { ServerRoolSelector } from './ServerRoolSelector';
+import { selectWindowInnerWidth } from '@/redux/slices/window-inner-width-slice';
 
 export const Calculator = () => {
   const tariffs = useRef<HTMLDivElement>(null);
+  const windowInnerWidth = useSelector(selectWindowInnerWidth);
+
   const [isTariffsOpen, setTariffsOpen] = useState<boolean>(false);
 
   const [currentTariff, setCurrentTariff] = useState<TariffType>(AllTariffs[0]);
@@ -27,8 +33,12 @@ export const Calculator = () => {
   const [linuxCounter, setLinuxCounter] = useState<number>(0);
   const [accessPointCounter, setAccessPointCounter] = useState<number>(0);
   const [nasCounter, setNasCounter] = useState<number>(0);
+  const [serverRoolCounter, setServerRoolCounter] = useState<number>(0);
+  const [serverRoolMax, setServerRoolMax] = useState<number>(0);
 
   const [sum, setSum] = useState<number>(0);
+
+  const [step, setStep] = useState<number>(1);
 
   const addSpacesToNumber = (num: number): string => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -39,6 +49,23 @@ export const Calculator = () => {
       setPcCounter(newValue);
     }
   };
+
+  useEffect(() => {
+    if (windowCounter > 0 || linuxCounter > 0) {
+      setServerRoolMax(windowCounter + linuxCounter);
+      // TODO: править после комментария Антона:
+      // что происходит при разных ситуациях
+      // (было много серверов + выбрано какое-то количество ролей, затем роли не трогали, а сервера уменьшили)
+      // if (serverRoolCounter === 0) {
+      //   setServerRoolCounter(1);
+      // }
+    }
+    if (windowCounter === 0 && linuxCounter === 0) {
+      if (serverRoolMax > 0) setServerRoolMax(0);
+      if (serverRoolCounter > 0) setServerRoolCounter(0);
+      // TODO: править после комментария Антона
+    }
+  }, [windowCounter, linuxCounter, serverRoolCounter, serverRoolMax]);
 
   useEffect(() => {
     const pcPrice =
@@ -53,14 +80,10 @@ export const Calculator = () => {
     const linuxSum = currentTariff.linuxServer * linuxCounter;
     const accessPointSum = currentTariff.accessPoint * accessPointCounter;
     const nasSum = currentTariff.nas * nasCounter;
+    const serverRoolSum = currentTariff.serverRool * serverRoolCounter;
 
     const allPrice =
-      pcSum +
-      windowSum +
-      linuxSum +
-      accessPointSum +
-      nasSum +
-      currentTariff.serverRool;
+      pcSum + windowSum + linuxSum + accessPointSum + nasSum + serverRoolSum;
 
     setSum(allPrice);
   }, [
@@ -69,6 +92,7 @@ export const Calculator = () => {
     linuxCounter,
     accessPointCounter,
     nasCounter,
+    serverRoolCounter,
     currentTariff,
   ]);
 
@@ -80,9 +104,24 @@ export const Calculator = () => {
       borderRadius="10px"
       maxWidth="1080px"
       minHeight="619px"
+      sx={{
+        '@media (max-width:900px)': {
+          p: '20px 18px',
+        },
+      }}
     >
       <Grid container spacing={10}>
-        <Grid item xs={4} display="flex" flexDirection="column">
+        <Grid
+          item
+          xs={windowInnerWidth > 1160 ? 4 : windowInnerWidth > 900 ? 6 : 12}
+          display="flex"
+          flexDirection="column"
+          sx={{
+            '@media (max-width:900px)': {
+              display: step === 1 ? 'flex' : 'none',
+            },
+          }}
+        >
           <ClickAwayListener onClickAway={() => setTariffsOpen(false)}>
             <Stack
               pt="12px"
@@ -90,6 +129,11 @@ export const Calculator = () => {
               onClick={(e) => e.stopPropagation()}
               position="relative"
               minHeight="52px"
+              sx={{
+                '@media (max-width:900px)': {
+                  pt: 0,
+                },
+              }}
             >
               <Stack
                 rowGap="7px"
@@ -105,9 +149,15 @@ export const Calculator = () => {
               >
                 <Button
                   variant="primitive"
-                  sx={{ display: 'flex', justifyContent: 'flex-start' }}
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    '@media (max-width:900px)': {
+                      fontSize: '22px',
+                    },
+                  }}
                   endIcon={
-                    <CustonMuiIcon
+                    <CustomMuiIcon
                       type={isTariffsOpen ? 'icon-arrow-up' : 'icon-arrow-down'}
                       size="21px"
                       sx={{
@@ -132,6 +182,9 @@ export const Calculator = () => {
                       sx={{
                         display: item === currentTariff ? 'none' : 'flex',
                         justifyContent: 'flex-start',
+                        '@media (max-width:900px)': {
+                          fontSize: '22px',
+                        },
                       }}
                       onClick={() => {
                         setCurrentTariff(item);
@@ -149,11 +202,28 @@ export const Calculator = () => {
             color="primary.main"
             pb="29px"
             pt="12px"
+            sx={{
+              '@media (max-width:900px)': {
+                fontSize: '18px',
+                pt: 0,
+              },
+            }}
           >
             Тариф определяет время реагирования и коллическо выездов в месяц.
             Все остальное Вы настраиваете сами.
           </Typography>
-          <Stack maxWidth="250px" pb="30px">
+          <Box
+            sx={{
+              display: 'none',
+              pb: '40px',
+              '@media (max-width:1160px)': {
+                display: 'flex',
+              },
+            }}
+          >
+            <TariffDetales tariff={currentTariff} />
+          </Box>
+          <Stack maxWidth="100%" pb="30px">
             <Typography variant="body1" color="secondary.main">
               Количество ПК:{' '}
               <span style={{ fontWeight: 700 }}>{pcCounter}</span>
@@ -193,46 +263,33 @@ export const Calculator = () => {
               subtitle="Сервер для хранения данных"
             />
           </Stack>
-        </Grid>
-        <Grid item xs={4} display="flex" flexDirection="column">
+
+          <ServerRoolSelector
+            windowCounter={windowCounter}
+            linuxCounter={linuxCounter}
+            serverRoolCounter={serverRoolCounter}
+            serverRoolMax={serverRoolMax}
+            setServerRoolCounter={setServerRoolCounter}
+          />
           <Stack
-            p="10px 25px"
-            border="1px solid"
-            borderColor="primary.main"
-            borderRadius="10px"
+            sx={{
+              display: 'none',
+              pt: '43px',
+              rowGap: '30px',
+              '@media (max-width:900px)': {
+                display: 'flex',
+              },
+            }}
           >
-            <Typography variant="h1" color="primary.main">{`${addSpacesToNumber(
-              sum,
-            )} ₽`}</Typography>
-            <Typography variant="h2" color="primary.main">
-              в месяц
-            </Typography>
-          </Stack>
-          <Stack justifyContent="space-between" rowGap="16px" pt="12px">
-            <Typography variant="body1" color="secondary.main">
-              Время реагирования:{' '}
-              <span style={{ fontWeight: 700 }}>
-                {currentTariff.reactionTime}
-              </span>
-            </Typography>
-            <Typography variant="body1" color="secondary.main">
-              Плановые выезды в месяц:{' '}
-              <span style={{ fontWeight: 700 }}>
-                {currentTariff.scheduledDeparture}
-              </span>
-            </Typography>
-            <Typography variant="body1" color="secondary.main">
-              Экстренные выезды:{' '}
-              <span style={{ fontWeight: 700 }}>
-                {currentTariff.emergencyDeparture}
-              </span>
-            </Typography>
-            <Typography variant="body1" color="secondary.main">
-              Консультации по телефону и удаленное подключение:{' '}
-              <span style={{ fontWeight: 700 }}>
-                {currentTariff.consultations}
-              </span>
-            </Typography>
+            <CalculatorResult sum={addSpacesToNumber(sum)} />
+            <Button
+              variant="default"
+              color="primary"
+              sx={{ width: '100%' }}
+              onClick={() => setStep(2)}
+            >
+              далее
+            </Button>
           </Stack>
         </Grid>
         <Grid
@@ -240,27 +297,92 @@ export const Calculator = () => {
           xs={4}
           display="flex"
           flexDirection="column"
-          alignItems="center"
+          sx={{
+            '@media (max-width:1160px)': {
+              display: 'none',
+            },
+          }}
         >
-          <Box height="14px"></Box>
-          <CalculatorForm />
-          <Typography variant="body1" color="secondary.main" pt="6px">
-            Остались вопросы?
-          </Typography>
-          <Link
-            variant="navigation"
-            color="primary.main"
+          <CalculatorResult sum={addSpacesToNumber(sum)} />
+          <TariffDetales tariff={currentTariff} />
+        </Grid>
+        <Grid
+          item
+          xs={windowInnerWidth > 1160 ? 4 : windowInnerWidth > 900 ? 6 : 12}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{
+            '@media (max-width:900px)': {
+              display: step === 2 ? 'flex' : 'none',
+            },
+          }}
+        >
+          <Box
+            minHeight="14px"
             sx={{
-              textDecoration: 'underline',
-              textDecorationColor: 'transparent',
-              '&:hover': {
-                textDecorationColor: 'primary.main',
+              '@media (max-width:1160px)': {
+                display: 'none',
               },
             }}
-            href="/cost#FAQ"
+          ></Box>
+          <Box
+            sx={{
+              display: 'none',
+              pb: '30px',
+              width: '100%',
+              '@media (max-width:1160px)': {
+                display: 'flex',
+              },
+            }}
           >
-            Узнайте больше
-          </Link>
+            <CalculatorResult sum={addSpacesToNumber(sum)} />
+          </Box>
+          <CalculatorForm />
+          <Stack
+            alignItems="center"
+            sx={{
+              '@media (max-width:900px)': {
+                display: 'none',
+              },
+            }}
+          >
+            <Typography variant="body1" color="secondary.main" pt="6px">
+              Остались вопросы?
+            </Typography>
+            <CustomLink
+              variant="navigation"
+              color="primary.main"
+              sx={{
+                textDecoration: 'underline',
+                textDecorationColor: 'transparent',
+                '&:hover': {
+                  textDecorationColor: 'primary.main',
+                },
+              }}
+              href="/cost#FAQ"
+            >
+              Узнайте больше
+            </CustomLink>
+          </Stack>
+          <Button
+            variant="default"
+            color="secondary"
+            sx={{
+              width: '100%',
+              display: 'none',
+              mt: '20px',
+              border: 'none',
+              color: (theme) => theme.palette.primary.main,
+              background: 'none',
+              '@media (max-width:900px)': {
+                display: 'flex',
+              },
+            }}
+            onClick={() => setStep(1)}
+          >
+            назад
+          </Button>
         </Grid>
       </Grid>
     </Box>

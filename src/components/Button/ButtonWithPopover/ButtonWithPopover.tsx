@@ -1,8 +1,17 @@
-import { useState, MouseEvent, ReactNode } from 'react';
+'use client';
+
+import { useState, MouseEvent, useMemo, ReactNode } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import Button, { buttonClasses, ButtonProps } from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
+import {
+  changeOpenModal,
+  selectOpenModal,
+  EModals,
+} from '@/redux/slices/modal-condition-slice';
 
 type ButtonWithPopoverProps = ButtonProps & {
   label: string;
@@ -17,14 +26,23 @@ export const ButtonWithPopover = ({
   ...props
 }: ButtonWithPopoverProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const dispatch = useDispatch();
+  const openModal = useSelector(selectOpenModal);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+    dispatch(changeOpenModal(EModals.ServicesMenu));
   };
   const handleClose = () => {
     setAnchorEl(null);
+    dispatch(changeOpenModal(null));
   };
-  const open = Boolean(anchorEl);
+
+  const open = useMemo(() => {
+    if (openModal === EModals.ServicesMenu) return true;
+    return false;
+  }, [openModal]);
+
   const id = open ? 'simple-popover' : undefined;
 
   return (
@@ -34,7 +52,7 @@ export const ButtonWithPopover = ({
         onClick={handleClick}
         variant="navigation"
         endIcon={
-          <CustonMuiIcon
+          <CustomMuiIcon
             type={open ? 'icon-arrow-up' : 'icon-arrow-down'}
             size="10px"
             style={{ fill: 'transparent' }}

@@ -13,9 +13,10 @@ import {
   HeaderLinkData,
 } from '@/components/Header/header.data';
 import { ButtonMore } from '@/components/Button/ButtonMore/ButtonMore';
-import { changeModalCondition } from '@/redux/slices/modal-condition-slice';
+import { changeOpenModal, EModals } from '@/redux/slices/modal-condition-slice';
 import { LINKS, formatPhoneNumber } from '@/shared/linksData/links.data';
 import { SocialContacts } from '@/components/SocialContacts/SocialContacts';
+import { CustomLink } from '@/components/Link/CustomLink';
 
 type MainMenuProps = {
   onServicesMenu: () => void;
@@ -30,7 +31,7 @@ export const MainMenu = ({ onServicesMenu }: MainMenuProps) => {
         {HEADER_LINKS_DATA.map((linkData: HeaderLinkData) => {
           if (linkData.type === ELiterals.Link) {
             return (
-              <Link key={linkData.label} href={linkData.href}>
+              <CustomLink key={linkData.label} href={linkData.href}>
                 <Typography
                   variant="h1"
                   color="secondary.main"
@@ -43,7 +44,7 @@ export const MainMenu = ({ onServicesMenu }: MainMenuProps) => {
                 >
                   {linkData.label}
                 </Typography>
-              </Link>
+              </CustomLink>
             );
           } else {
             return (
@@ -61,7 +62,7 @@ export const MainMenu = ({ onServicesMenu }: MainMenuProps) => {
         <Button
           variant="default"
           color="primary"
-          onClick={() => dispatch(changeModalCondition(true))}
+          onClick={() => dispatch(changeOpenModal(EModals.Communication))}
           sx={{
             maxWidth: '357px',
             width: '100%',

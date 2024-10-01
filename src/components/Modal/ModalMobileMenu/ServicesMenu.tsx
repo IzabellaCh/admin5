@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { EMenu, TVisibleMenu } from './modalMobileMenu.types';
 import { SERVICES, ServiceData } from '@/shared/serviceData/service.data';
 import { ENavigationLinksName } from '@/shared/navigationData/navigation.data';
@@ -27,7 +27,7 @@ export const ServicesMenu = ({ handleNavigate }: ServicesMenuProps) => {
             },
           })}
         >
-          <CustonMuiIcon
+          <CustomMuiIcon
             type="icon-arrow-left"
             size="30px"
             style={{ fill: 'transparent' }}

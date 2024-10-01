@@ -68,7 +68,7 @@ export const PopularArticle = () => {
         </Box>
         <ButtonMore
           text="Читать"
-          onClick={() => router.push(`blog/${ALL_ARTICLES[randomNumber]?.id}`)}
+          onClick={() => router.push(`/blog/${ALL_ARTICLES[randomNumber]?.id}`)}
         />
       </Stack>
       <Box

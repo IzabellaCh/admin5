@@ -15,7 +15,7 @@ import whyUsImage from '../../public/assets/icons/home-page/image_why_us.jpg';
 import whyUsMobileImage from '../../public/assets/icons/home-page/image_why_us_mobile.jpg';
 import aboutUsImage from '../../public/assets/icons/home-page/image_about_us.jpg';
 
-import { changeModalCondition } from '@/redux/slices/modal-condition-slice';
+import { changeOpenModal } from '@/redux/slices/modal-condition-slice';
 import { AnimatedText } from '@/components/AnimatedText/AnimatedText';
 import { HomeTitle } from '@/components/HomeTitle/HomeTitle';
 import {
@@ -35,7 +35,7 @@ import { ButtonMore } from '@/components/Button/ButtonMore/ButtonMore';
 import { StepNumber } from '@/components/Step/StepNumber';
 import { StepText } from '@/components/Step/StepText';
 import { Step } from '@/components/Step/Step';
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { Feedback } from '@/components/Feedback/Feedback';
 import { FEEDBACK_DATA } from '@/shared/feedbackData/feedback.data';
 import { ScoreTable } from '@/components/Score/ScoreTable';
@@ -303,7 +303,7 @@ export default function Home() {
                       },
                     }}
                   >
-                    <CustonMuiIcon
+                    <CustomMuiIcon
                       type="icon-home-speech-balloon"
                       size="224px"
                     />
@@ -446,7 +446,7 @@ export default function Home() {
                     key={index}
                     variant="linkButton"
                     color="primary"
-                    href={`blog/${article.id}`}
+                    href={`/blog/${article.id}`}
                   >
                     {article.title}
                   </Link>
@@ -641,7 +641,7 @@ export default function Home() {
         <Button
           variant="default"
           color="primary"
-          onClick={() => dispatch(changeModalCondition(true))}
+          onClick={() => dispatch(changeOpenModal(true))}
           sx={{
             '@media (max-width:500px)': {
               width: '100%',

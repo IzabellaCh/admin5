@@ -2,10 +2,10 @@
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 
 import { SERVICES, ServiceData } from '@/shared/serviceData/service.data';
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomLink } from '@/components/Link/CustomLink';
 
 const Services = () => {
   return (
@@ -49,26 +49,26 @@ const Services = () => {
               },
             }}
           >
-            <CustonMuiIcon
+            <CustomMuiIcon
               type={service.shadowImageType}
               size={service.imageSizeM}
               style={{ fill: 'transparent' }}
             />
           </Stack>
-          <Link href={service.route}>
+          <CustomLink href={service.route}>
             <Typography variant="h2" color="secondary.main" p="43px 0 23px">
               {service.title}
             </Typography>
-          </Link>
+          </CustomLink>
           <Stack rowGap="22px">
             {service.articles.map((article, index) => (
-              <Link
+              <CustomLink
                 key={index}
                 variant="articleListItem"
-                href={`blog/${article.id}`}
+                href={`/blog/${article.id}`}
               >
                 {article.title}
-              </Link>
+              </CustomLink>
             ))}
           </Stack>
         </Stack>

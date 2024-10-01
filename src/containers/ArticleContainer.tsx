@@ -2,10 +2,9 @@
 
 import { useState, useEffect, ReactNode } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeModalCondition } from '@/redux/slices/modal-condition-slice';
+import { changeOpenModal, EModals } from '@/redux/slices/modal-condition-slice';
 
 import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -20,6 +19,8 @@ import {
   HEADER_LINKS_DATA,
   HeaderLinkData,
 } from '@/components/Header/header.data';
+import { CustomLink } from '@/components/Link/CustomLink';
+
 type ArticleContainerProps = {
   children: ReactNode;
   article: TArticleData;
@@ -71,7 +72,7 @@ export const ArticleContainer = ({
           }}
         >
           {article?.sections?.map((section, index) => (
-            <Link
+            <CustomLink
               key={index}
               variant="linkButton"
               color="primary"
@@ -84,17 +85,17 @@ export const ArticleContainer = ({
               }
             >
               {section}
-            </Link>
+            </CustomLink>
           ))}
           {article?.tags?.map((tag, index) => (
-            <Link
+            <CustomLink
               key={index}
               variant="linkButton"
               color="primary"
               href={`/blog?tag=${tag}`}
             >
               {tag}
-            </Link>
+            </CustomLink>
           ))}
         </Stack>
         <Typography
@@ -152,7 +153,7 @@ export const ArticleContainer = ({
             <Button
               variant="default"
               color="primary"
-              onClick={() => dispatch(changeModalCondition(true))}
+              onClick={() => dispatch(changeOpenModal(EModals.Communication))}
               sx={{
                 '@media (max-width:600px)': {
                   width: '360px',
@@ -176,13 +177,13 @@ export const ArticleContainer = ({
         >
           <Stack rowGap="30px" position="sticky" top="30%">
             {HEADER_LINKS_DATA.map((linkData: HeaderLinkData) => (
-              <Link
+              <CustomLink
                 href={linkData.href}
                 key={linkData.label}
                 variant="navigation"
               >
                 {linkData.label}
-              </Link>
+              </CustomLink>
             ))}
           </Stack>
         </Box>

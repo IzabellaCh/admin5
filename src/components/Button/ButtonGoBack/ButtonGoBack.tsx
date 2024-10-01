@@ -1,8 +1,8 @@
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 
 export const ButtonGoBack = () => {
   return (
-    <CustonMuiIcon
+    <CustomMuiIcon
       type="icon-arrow-left"
       size="29px"
       style={{

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { PairButtonsContainer } from './PairButtonsContainer';
 import { ServiceCard } from '@/components/ServiceCard/ServiceCard';
 import { SERVICES, ServiceData } from '@/shared/serviceData/service.data';
@@ -48,7 +48,7 @@ export const ServiceContainer = ({
           },
         }}
       >
-        <CustonMuiIcon
+        <CustomMuiIcon
           type={service.commonImageType}
           size={
             windowInnerWidth > 900 ? service.imageSizeL : service.imageSizeM

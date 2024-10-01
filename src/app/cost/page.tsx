@@ -16,6 +16,11 @@ const Cost = () => {
         color="secondary.main"
         textAlign="center"
         pt="23px"
+        sx={{
+          '@media (max-width:900px)': {
+            textAlign: 'left',
+          },
+        }}
       >
         Идеальный тариф для каждого
       </Typography>
@@ -24,6 +29,11 @@ const Cost = () => {
         color="secondary.main"
         textAlign="center"
         p="6px 0 18px"
+        sx={{
+          '@media (max-width:900px)': {
+            textAlign: 'left',
+          },
+        }}
       >
         Рассчитайте стоимость исходя из своих запросов
       </Typography>

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Stack, { StackProps } from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { selectIsMobileDevice } from '@/redux/slices/mobile-device-slice';
 import { LINKS } from '@/shared/linksData/links.data';
 
@@ -18,7 +18,7 @@ export const SocialContacts = ({ iconSize, ...props }: SocialContactsProps) => {
   return (
     <Stack direction="row" {...props}>
       <Link href={LINKS.telegram} target="_blank" rel="noopener" display="flex">
-        <CustonMuiIcon type="icon-telegram" size={iconSize} />
+        <CustomMuiIcon type="icon-telegram" size={iconSize} />
       </Link>
       <Link
         href={isMobileDevice ? LINKS.whatsappMobile : LINKS.whatsappWeb}
@@ -26,10 +26,10 @@ export const SocialContacts = ({ iconSize, ...props }: SocialContactsProps) => {
         rel="noopener"
         display="flex"
       >
-        <CustonMuiIcon type="icon-whatsapp" size={iconSize} />
+        <CustomMuiIcon type="icon-whatsapp" size={iconSize} />
       </Link>
       <Link href={LINKS.vk} target="_blank" rel="noopener" display="flex">
-        <CustonMuiIcon type="icon-vk" size={iconSize} />
+        <CustomMuiIcon type="icon-vk" size={iconSize} />
       </Link>
     </Stack>
   );

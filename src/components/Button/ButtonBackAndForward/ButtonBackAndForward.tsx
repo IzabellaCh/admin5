@@ -1,6 +1,6 @@
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import Typography from '@mui/material/Typography';
 
 type ButtonBackAndForwardProps = {
@@ -57,7 +57,7 @@ export const ButtonBackAndForward = ({
           },
         })}
       >
-        <CustonMuiIcon
+        <CustomMuiIcon
           type={iconTypeLeft}
           size={iconSize}
           style={{
@@ -88,7 +88,7 @@ export const ButtonBackAndForward = ({
           },
         })}
       >
-        <CustonMuiIcon
+        <CustomMuiIcon
           type={iconTypeRight}
           size={iconSize}
           style={{

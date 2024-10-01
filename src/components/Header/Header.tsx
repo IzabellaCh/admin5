@@ -9,13 +9,12 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { HEADER_LINKS_DATA, HeaderLinkData } from './header.data';
 import { ButtonWithPopover } from '@/components/Button/ButtonWithPopover/ButtonWithPopover';
 import { ServicesPopoverContent } from '@/components/ServicesPopoverContent/ServicesPopoverContent';
-import {
-  changeModalCondition,
-} from '@/redux/slices/modal-condition-slice';
+import { CustomLink } from '@/components/Link/CustomLink';
+import { changeOpenModal, EModals } from '@/redux/slices/modal-condition-slice';
 import {
   setWindowInnerWidth,
   selectWindowInnerWidth,
@@ -27,8 +26,10 @@ import { selectIsMobileDevice } from '@/redux/slices/mobile-device-slice';
 import { setDevise } from '@/redux/slices/mobile-device-slice';
 
 import { ModalMobileMenu } from '@/components/Modal/ModalMobileMenu/ModalMobileMenu';
+import { useNewRouteToCloseModal } from '@/hooks/useNewRouteToCloseModal';
 
 export const Header = () => {
+  useNewRouteToCloseModal();
   const dispatch = useDispatch();
   const pathname = usePathname();
   const isMobileDevice = useSelector(selectIsMobileDevice);
@@ -36,9 +37,6 @@ export const Header = () => {
 
   const [scrollTop, setScrollTop] = useState<number>(0);
   const [windowHeight, setWindowHeight] = useState<number>(950);
-
-  const [isModalMobileMenuOpen, setModalMobileMenuOpen] =
-    useState<boolean>(false);
 
   const handleScroll = () => {
     setTimeout(() => setScrollTop(window.scrollY), 2000);
@@ -82,7 +80,7 @@ export const Header = () => {
 
   useEffect(() => {
     dispatch(setWindowInnerWidth(window.innerWidth));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     window.addEventListener('resize', onUpdateWidth);
@@ -134,7 +132,7 @@ export const Header = () => {
             },
           }}
         >
-          <Link href="/">
+          <CustomLink href="/">
             <Stack
               direction="row"
               maxHeight="65px"
@@ -147,17 +145,17 @@ export const Header = () => {
               }}
             >
               {scrollTop > windowHeight ? null : (
-                <CustonMuiIcon
+                <CustomMuiIcon
                   type="icon-logo-letter"
                   size={windowInnerWidth > 900 ? '78px' : '52px'}
                 />
               )}
-              <CustonMuiIcon
+              <CustomMuiIcon
                 type="icon-logo-name"
                 size={windowInnerWidth > 900 ? '172px' : '121px'}
               />
             </Stack>
-          </Link>
+          </CustomLink>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -168,7 +166,7 @@ export const Header = () => {
                 width: 'max-content',
                 columnGap: '20px',
               },
-              '@media (max-width:900px)': {
+              '@media (max-width:1000px)': {
                 display: 'none',
               },
             }}
@@ -176,7 +174,7 @@ export const Header = () => {
             {HEADER_LINKS_DATA.map((linkData: HeaderLinkData) => {
               if (linkData.type === ELiterals.Link) {
                 return (
-                  <Link
+                  <CustomLink
                     href={linkData.href}
                     key={linkData.label}
                     variant="navigation"
@@ -187,7 +185,7 @@ export const Header = () => {
                     }}
                   >
                     {linkData.label}
-                  </Link>
+                  </CustomLink>
                 );
               } else {
                 return (
@@ -212,7 +210,7 @@ export const Header = () => {
             alignItems="center"
             justifyContent="space-between"
             sx={{
-              '@media (max-width:900px)': {
+              '@media (max-width:1000px)': {
                 display: 'none',
               },
             }}
@@ -223,7 +221,7 @@ export const Header = () => {
               rel="noopener"
               display="flex"
             >
-              <CustonMuiIcon type="icon-whatsapp" size="33px" />
+              <CustomMuiIcon type="icon-whatsapp" size="33px" />
             </Link>
             <Link
               href={LINKS.telegram}
@@ -231,7 +229,7 @@ export const Header = () => {
               rel="noopener"
               display="flex"
             >
-              <CustonMuiIcon type="icon-telegram" size="33px" />
+              <CustomMuiIcon type="icon-telegram" size="33px" />
             </Link>
             <IconButton
               sx={(theme) => ({
@@ -243,9 +241,9 @@ export const Header = () => {
                   display: 'inline-flex',
                 },
               })}
-              onClick={() => dispatch(changeModalCondition(true))}
+              onClick={() => dispatch(changeOpenModal(EModals.Communication))}
             >
-              <CustonMuiIcon type="icon-phone" size="33px" />
+              <CustomMuiIcon type="icon-phone" size="33px" />
             </IconButton>
             <Box
               position="relative"
@@ -259,7 +257,7 @@ export const Header = () => {
               <Button
                 variant="default"
                 color="primary"
-                onClick={() => dispatch(changeModalCondition(true))}
+                onClick={() => dispatch(changeOpenModal(EModals.Communication))}
               >
                 связаться с нами
               </Button>
@@ -284,19 +282,17 @@ export const Header = () => {
           <IconButton
             sx={{
               display: 'none',
-              '@media (max-width:900px)': {
+              '@media (max-width:1000px)': {
                 display: 'inline-flex',
               },
             }}
-            onClick={() => setModalMobileMenuOpen(true)}
+            onClick={() => dispatch(changeOpenModal(EModals.MobileMenu))}
           >
-            <CustonMuiIcon type="icon-header-burger" size="40px" />
+            <CustomMuiIcon type="icon-header-burger" size="40px" />
           </IconButton>
         </Stack>
       </Box>
-      {isModalMobileMenuOpen && (
-        <ModalMobileMenu handleClose={() => setModalMobileMenuOpen(false)} />
-      )}
+      <ModalMobileMenu />
     </header>
   );
 };

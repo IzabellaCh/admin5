@@ -3,7 +3,7 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { CustonMuiIcon } from '../../mui/muiCustomIcon';
+import { CustomMuiIcon } from '../../mui/muiCustomIcon';
 
 type CounterProps = {
   counter: number;
@@ -41,7 +41,7 @@ export const Counter = ({
           onClick={() => setCounter(counter - 1)}
           disabled={counter === 0}
         >
-          <CustonMuiIcon
+          <CustomMuiIcon
             type="icon-remove"
             size="16px"
             sx={{
@@ -58,7 +58,7 @@ export const Counter = ({
           onClick={() => setCounter(counter + 1)}
           disabled={counter === 10}
         >
-          <CustonMuiIcon
+          <CustomMuiIcon
             type="icon-add"
             size="16px"
             sx={{

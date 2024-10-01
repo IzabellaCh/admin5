@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { selectWindowInnerWidth } from '@/redux/slices/window-inner-width-slice';
 
 export const Page404Container = () => {
@@ -28,7 +28,7 @@ export const Page404Container = () => {
         },
       }}
     >
-      <CustonMuiIcon
+      <CustomMuiIcon
         type="icon-404-page"
         size={
           windowInnerWidth > 1080

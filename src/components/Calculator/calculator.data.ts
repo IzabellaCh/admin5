@@ -48,35 +48,3 @@ export const AllTariffs = [
     consultations: 'не\u00A0ограничено',
   },
 ];
-
-export const standartTariff = {
-  name: 'Стандартный',
-  pc1: 1000,
-  pc5: 900,
-  pc10: 850,
-  windowServer: 2000,
-  linuxServer: 2500,
-  accessPoint: 900,
-  currentTariff: 900,
-  serverRool: 1000,
-  reactionTime: '1 час',
-  scheduledDeparture: 1,
-  emergencyDeparture: 2,
-  consultations: 'не\u00A0ограничено',
-};
-
-export const baseTariff = {
-  name: 'Базовый',
-  pc1: 1100,
-  pc5: 1000,
-  pc10: 900,
-  windowServer: 2500,
-  linuxServer: 3000,
-  accessPoint: 700,
-  nas: 1200,
-  serverRool: 1500,
-  reactionTime: '30 минут',
-  scheduledDeparture: 2,
-  emergencyDeparture: 4,
-  consultations: 'не\u00A0ограничено',
-};

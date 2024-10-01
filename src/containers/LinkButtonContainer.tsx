@@ -29,7 +29,7 @@ export const LinkButtonContainer = ({
             key={index}
             variant="linkButton"
             color={linkVariantColor}
-            href={article.id}
+            href={`/blog/${article.id}`}
           >
             {article.title}
           </Link>

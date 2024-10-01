@@ -12,13 +12,14 @@ import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import { ModalForm } from '../Form/ModalForm/ModalForm';
 import counsellor from '../../../public/assets/icons/modal/counsellor.png';
-import { CustonMuiIcon } from '../../mui/muiCustomIcon';
+import { CustomMuiIcon } from '../../mui/muiCustomIcon';
 import { selectIsMobileDevice } from '@/redux/slices/mobile-device-slice';
 import { LINKS } from '@/shared/linksData/links.data';
 
 import {
-  changeModalCondition,
-  selectIsModalOpen,
+  changeOpenModal,
+  selectOpenModal,
+  EModals,
 } from '@/redux/slices/modal-condition-slice';
 import { selectWindowInnerWidth } from '@/redux/slices/window-inner-width-slice';
 
@@ -26,16 +27,20 @@ import { selectWindowInnerWidth } from '@/redux/slices/window-inner-width-slice'
 
 export const ModalСommunication = () => {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector(selectIsModalOpen);
+  const openModal = useSelector(selectOpenModal);
   const isMobileDevice = useSelector(selectIsMobileDevice);
   const windowInnerWidth = useSelector(selectWindowInnerWidth);
 
   const handleClose = () => {
-    dispatch(changeModalCondition(false));
+    dispatch(changeOpenModal(null));
   };
 
   return (
-    <Modal onClose={handleClose} open={isModalOpen} closeAfterTransition>
+    <Modal
+      onClose={handleClose}
+      open={openModal === EModals.Communication}
+      closeAfterTransition
+    >
       <Stack
         sx={{
           maxWidth: '785px',
@@ -70,9 +75,9 @@ export const ModalСommunication = () => {
           }}
         >
           {windowInnerWidth > 900 ? (
-            <CustonMuiIcon type="icon-close" size="27px" />
+            <CustomMuiIcon type="icon-close" size="27px" />
           ) : (
-            <CustonMuiIcon type="icon-close-rounded" size="30px" />
+            <CustomMuiIcon type="icon-close-rounded" size="30px" />
           )}
         </IconButton>
         <Stack
@@ -124,9 +129,9 @@ export const ModalСommunication = () => {
                 maxHeight="93px"
               >
                 {windowInnerWidth > 900 ? (
-                  <CustonMuiIcon type="icon-advice-bottom" size="187px" />
+                  <CustomMuiIcon type="icon-advice-bottom" size="187px" />
                 ) : (
-                  <CustonMuiIcon type="icon-advice-top" size="187px" />
+                  <CustomMuiIcon type="icon-advice-top" size="187px" />
                 )}
                 <Typography
                   variant="body2"
@@ -222,10 +227,10 @@ export const ModalСommunication = () => {
                 target="_blank"
                 rel="noopener"
               >
-                <CustonMuiIcon type="icon-whatsapp" size="53px" />
+                <CustomMuiIcon type="icon-whatsapp" size="53px" />
               </Link>
               <Link href={LINKS.telegram} target="_blank" rel="noopener">
-                <CustonMuiIcon type="icon-telegram" size="53px" />
+                <CustomMuiIcon type="icon-telegram" size="53px" />
               </Link>
             </Stack>
           </Stack>

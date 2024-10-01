@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { MobileModalContainer } from '@/containers/MobileModalContainer';
 import { MainMenu } from './MainMenu';
@@ -8,16 +9,16 @@ import { ServicesMenu } from './ServicesMenu';
 import { ServiceArticlesMenu } from './ServiceArticlesMenu';
 import { EMenu, TVisibleMenu } from './modalMobileMenu.types';
 import { SERVICES } from '@/shared/serviceData/service.data';
+import { selectOpenModal, EModals } from '@/redux/slices/modal-condition-slice';
 
-type ModalMobileMenuProps = {
-  handleClose: () => void;
-};
-
-export const ModalMobileMenu = ({ handleClose }: ModalMobileMenuProps) => {
+export const ModalMobileMenu = () => {
   const [visibleMenu, setVisibleMenu] = useState<TVisibleMenu>(EMenu.MainMenu);
+  const openModal = useSelector(selectOpenModal);
+
+  if (openModal !== EModals.MobileMenu) return null;
 
   return (
-    <MobileModalContainer handleClose={handleClose}>
+    <MobileModalContainer>
       {visibleMenu === EMenu.MainMenu && (
         <MainMenu onServicesMenu={() => setVisibleMenu(EMenu.ServicesMenu)} />
       )}

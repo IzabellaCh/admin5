@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { CustomLink } from '@/components/Link/CustomLink';
 import { LINKS, formatPhoneNumber } from '@/shared/linksData/links.data';
 import { FOOTER_LINKS_DATA } from './footer.data';
 import { SocialContacts } from '@/components/SocialContacts/SocialContacts';
@@ -79,24 +80,24 @@ export const Footer = () => {
           >
             <Stack sx={navStyles}>
               {FOOTER_LINKS_DATA.slice(0, 3).map((service) => (
-                <Link
+                <CustomLink
                   key={service.label}
                   variant="navigation"
                   href={service.href}
                 >
                   {service.label}
-                </Link>
+                </CustomLink>
               ))}
             </Stack>
             <Stack sx={navStyles}>
               {FOOTER_LINKS_DATA.slice(3).map((service) => (
-                <Link
+                <CustomLink
                   key={service.label}
                   variant="navigation"
                   href={service.href}
                 >
                   {service.label}
-                </Link>
+                </CustomLink>
               ))}
             </Stack>
           </Stack>
@@ -160,14 +161,17 @@ export const Footer = () => {
             },
           }}
         >
-          <Link
-            href="https://github.com/IzabellaCh"
-            variant="navigation"
-            target="_blank"
-            rel="noopener"
+          <Typography
+            variant="body1"
+            color="secondary.main"
+            sx={{
+              '@media (max-width:760px)': {
+                fontSize: '15px',
+              },
+            }}
           >
-            &#169; Chebakova Izabella
-          </Link>
+            &#169; ООО &quot;ИСКРА&quot;, г. Санкт-Петербург, 2008 - 2024
+          </Typography>
         </Stack>
       </Box>
     </footer>

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Button from '@mui/material/Button';
 import Stack, { StackProps } from '@mui/material/Stack';
 
-import { changeModalCondition } from '@/redux/slices/modal-condition-slice';
+import { changeOpenModal, EModals } from '@/redux/slices/modal-condition-slice';
 
 export const PairButtonsContainer = ({ sx, ...props }: StackProps) => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export const PairButtonsContainer = ({ sx, ...props }: StackProps) => {
       <Button
         variant="default"
         color="primary"
-        onClick={() => dispatch(changeModalCondition(true))}
+        onClick={() => dispatch(changeOpenModal(EModals.Communication))}
       >
         связаться с нами
       </Button>

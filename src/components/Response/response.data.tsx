@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { CustonMuiIcon } from '../../mui/muiCustomIcon';
+import { CustomMuiIcon } from '../../mui/muiCustomIcon';
 
 export type ResponseType = {
   icon: ReactNode;
@@ -10,7 +10,7 @@ export type ResponseType = {
 
 export const RESPONSE_SUCCESS: ResponseType = {
   icon: (
-    <CustonMuiIcon
+    <CustomMuiIcon
       type="icon-response-success"
       size="109px"
       style={{ fill: 'transparent' }}
@@ -23,7 +23,7 @@ export const RESPONSE_SUCCESS: ResponseType = {
 
 export const RESPONSE_ERROR: ResponseType = {
   icon: (
-    <CustonMuiIcon
+    <CustomMuiIcon
       type="icon-response-error"
       size="109px"
       style={{ fill: 'transparent' }}

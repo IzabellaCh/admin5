@@ -1,12 +1,12 @@
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { TArticleData } from '@/shared/articlesData/articles.data';
 import { ServiceData } from '@/shared/serviceData/service.data';
 import { LinkMore } from '@/components/Link/LinkMore';
+import { CustomLink } from '@/components/Link/CustomLink';
 
 type ServiceArticlesMenuProps = {
   handleNavigate: () => void;
@@ -32,7 +32,7 @@ export const ServiceArticlesMenu = ({
             },
           })}
         >
-          <CustonMuiIcon
+          <CustomMuiIcon
             type="icon-arrow-left"
             size="30px"
             style={{ fill: 'transparent' }}
@@ -41,7 +41,7 @@ export const ServiceArticlesMenu = ({
         {serviceData.articles
           .slice(0, 7)
           .map((article: TArticleData, index: number) => (
-            <Link key={index} href={`/blog/${article.id}`}>
+            <CustomLink key={index} href={`/blog/${article.id}`}>
               <Typography
                 variant="h1"
                 color="secondary.main"
@@ -54,7 +54,7 @@ export const ServiceArticlesMenu = ({
               >
                 {article.title}
               </Typography>
-            </Link>
+            </CustomLink>
           ))}
         {serviceData.articles.length - 7 > 0 ? (
           <LinkMore

@@ -17,6 +17,7 @@ export const TextFieldWrapper = <T extends FieldValues>({
   label,
   control,
   errorMessage,
+  sx,
   ...props
 }: TControlledInputProps<T>) => {
   const { field } = useController<T>({ control, name });
@@ -36,6 +37,7 @@ export const TextFieldWrapper = <T extends FieldValues>({
           transition: 'all 0.5s linear',
           color: errorMessage ? 'error.main' : null,
         },
+        ...sx,
       }}
     />
   );

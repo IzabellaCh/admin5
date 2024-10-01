@@ -72,7 +72,19 @@ export const CalculatorForm = () => {
   return (
     <Stack width="100%" position="relative">
       <Stack>
-        <Typography textAlign="center" variant="h2" color="secondary.main">
+        <Typography
+          variant="h2"
+          color="secondary.main"
+          sx={{
+            textAlign: 'center',
+            '@media (max-width:1160px)': {
+              textAlign: 'left',
+            },
+            '@media (max-width:900px)': {
+              fontSize: '22px',
+            },
+          }}
+        >
           Ваши контакты
         </Typography>
         <Typography
@@ -80,6 +92,11 @@ export const CalculatorForm = () => {
           variant="caption"
           color="primary.main"
           maxWidth="274px"
+          sx={{
+            '@media (max-width:1160px)': {
+              display: 'none',
+            },
+          }}
         >
           Если вас все подходит, оставьте контакты для дальнейшего
           сотрудничества
@@ -93,6 +110,9 @@ export const CalculatorForm = () => {
               display: 'flex',
               flexDirection: 'column',
               rowGap: '20px',
+              '@media (max-width:900px)': {
+                pt: '20px',
+              },
             }}
           >
             <TextFieldWrapper
@@ -132,10 +152,15 @@ export const CalculatorForm = () => {
               errorMessage={errors.field?.message}
               multiline
               minRows={3}
-              style={{
+              sx={{
                 position: 'absolute',
                 bottom: '-70px',
                 left: '-360px',
+                '@media (max-width:1180px)': {
+                  position: 'static',
+                  bottom: 0,
+                  left: 0,
+                },
               }}
             />
             <CheckboxAgreementWrapper
@@ -153,7 +178,13 @@ export const CalculatorForm = () => {
           type="submit"
           variant="default"
           color="primary"
-          sx={{ width: '100%', mt: '11px' }}
+          sx={{
+            width: '100%',
+            mt: '11px',
+            '@media (max-width:900px)': {
+              mt: '30px',
+            },
+          }}
           disabled={submitCount > 1 && !isValid}
         >
           {isSuccessOpen

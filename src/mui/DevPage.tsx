@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import { ButtonMore } from '../components/Button/ButtonMore/ButtonMore';
-import { CustonMuiIcon } from './muiCustomIcon';
+import { CustomMuiIcon } from './muiCustomIcon';
 import IconButton from '@mui/material/IconButton';
 import { ModalСommunication } from '../components/Modal/ModalCommunication';
 import { Calculator } from '../components/Calculator/Calculator';
@@ -15,13 +15,14 @@ import { SERVICES } from '@/shared/serviceData/service.data';
 import { ServicesTabs } from '@/components/ServicesTabs/ServicesTabs';
 import { setDevise } from '@/redux/slices/mobile-device-slice';
 import {
-  changeModalCondition,
-  selectIsModalOpen,
+  changeOpenModal,
+  selectOpenModal,
+  EModals,
 } from '@/redux/slices/modal-condition-slice';
 
 export const DevPage = () => {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector(selectIsModalOpen);
+  const openModal = useSelector(selectOpenModal);
 
   const [val, setVal] = useState(1);
 
@@ -100,7 +101,7 @@ export const DevPage = () => {
         <Button
           variant="default"
           color="primary"
-          onClick={() => dispatch(changeModalCondition(true))}
+          onClick={() => dispatch(changeOpenModal(EModals.Communication))}
         >
           связаться с нами
         </Button>
@@ -143,16 +144,16 @@ export const DevPage = () => {
           Icon buttons
         </Typography>
         <IconButton>
-          <CustonMuiIcon type="icon-telegram" size="33px" />
+          <CustomMuiIcon type="icon-telegram" size="33px" />
         </IconButton>
         <IconButton>
-          <CustonMuiIcon type="icon-facebook" size="40px" />
+          <CustomMuiIcon type="icon-facebook" size="40px" />
         </IconButton>
         <IconButton>
-          <CustonMuiIcon type="icon-vk" size="53px" />
+          <CustomMuiIcon type="icon-vk" size="53px" />
         </IconButton>
         <IconButton>
-          <CustonMuiIcon type="icon-messagers" size="77px" />
+          <CustomMuiIcon type="icon-messagers" size="77px" />
         </IconButton>
       </Stack>
       <Stack rowGap="10px" pt="20px">
@@ -196,7 +197,7 @@ export const DevPage = () => {
           Удаление вирусов
         </Link>
       </Stack>
-      {isModalOpen && <ModalСommunication />}
+      {openModal && <ModalСommunication />}
     </Stack>
   );
 };

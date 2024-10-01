@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import Link, { LinkProps } from '@mui/material/Link';
+import { LinkProps } from '@mui/material/Link';
 import { getNoun } from '@/utils/function';
+import { CustomLink } from '@/components/Link/CustomLink';
 
 type LinkMoreProps = LinkProps & {
   number: number;
@@ -14,5 +15,10 @@ export const LinkMore = ({ number, ...props }: LinkMoreProps) => {
     setService(word);
   }, [number]);
 
-  return <Link variant="more" {...props}>{`еще ${number} ${service} +`}</Link>;
+  return (
+    <CustomLink
+      variant="more"
+      {...props}
+    >{`еще ${number} ${service} +`}</CustomLink>
+  );
 };

@@ -22,7 +22,7 @@ export const ArticleCardSecondType = ({
 
   return (
     <Link
-      href={`blog/${articleData.id}`}
+      href={`/blog/${articleData.id}`}
       sx={(theme) => ({
         gridColumn: index === 6 ? '1 / 3' : '2 / 4',
         '@media (max-width:600px)': {

@@ -649,6 +649,7 @@ theme = createTheme(theme, {
           '& .MuiSlider-track': {
             maxHeight: '5px',
             color: theme.palette.primary.main,
+            width: '100%',
           },
           '& .MuiSlider-thumb': {
             height: '16px',

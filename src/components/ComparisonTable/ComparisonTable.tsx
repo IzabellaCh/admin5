@@ -15,7 +15,7 @@ import Stack from '@mui/material/Stack';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import DisabledByDefaultRoundedIcon from '@mui/icons-material/DisabledByDefaultRounded';
 
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { ComparisonTableItem } from './ComparisonTableItem';
 import { TABLE_FULL_DATA } from './comparisonTable.data';
 import { RoundedBorderTableCell } from './RoundedBorderTableCell';
@@ -76,11 +76,11 @@ export const ComparisonTable = () => {
                   },
                 }}
               >
-                <CustonMuiIcon
+                <CustomMuiIcon
                   type="icon-logo-letter"
                   size={windowInnerWidth > 900 ? '78px' : '52px'}
                 />
-                <CustonMuiIcon
+                <CustomMuiIcon
                   type="icon-logo-name"
                   size={windowInnerWidth > 900 ? '172px' : '121px'}
                 />

@@ -172,16 +172,16 @@ const iconComponentMap: { [key: string]: iconComponentMapArg } = {
     viewBox: '0 0 21 36',
   },
 };
-interface CustonMuiIconProps extends SvgIconProps {
+interface CustomMuiIconProps extends SvgIconProps {
   type: string;
   size: string;
 }
-export const CustonMuiIcon = ({
+export const CustomMuiIcon = ({
   type,
   size,
   sx,
   ...props
-}: CustonMuiIconProps) => {
+}: CustomMuiIconProps) => {
   const component = iconComponentMap[type];
 
   return component ? (

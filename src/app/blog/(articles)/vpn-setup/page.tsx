@@ -3,9 +3,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import { ArticleContainer } from '@/containers/ArticleContainer';
-import { ALL_ARTICLES } from '@/shared/articlesData/articles.data';
+import { ALL_ARTICLES, commonWidth } from '@/shared/articlesData/articles.data';
 import { UlList } from '@/components/UlList/UlList';
 import { LinkedSrevices } from '@/components/LinkedServices/LinkedServices';
+import { ArticlesRoutes } from '@/shared/routesData/routes.data';
+import { ArticleImage } from '@/components/ArticleImage/ArticleImage';
 
 const listOne: string[] = [
   'Универсальный VPN-сервер, позволяющий работать с различными устройствами;',
@@ -27,10 +29,10 @@ const listThree: string[] = [
   'Обезопасить работы в сети Интернет.',
 ];
 
-const commonWidth = '581px';
-
 const VpnSetup = () => {
-  const currentArticle = ALL_ARTICLES.find((item) => item.id === 'vpn-setup');
+  const currentArticle = ALL_ARTICLES.find(
+    (item) => item.id === ArticlesRoutes.vpnSetup,
+  );
 
   if (currentArticle === undefined) return null;
   return (
@@ -57,29 +59,7 @@ const VpnSetup = () => {
           перехватить данные.
         </Typography>
       </Stack>
-      <Box
-        id="article-image"
-        width="100%"
-        sx={{
-          backgroundImage: `url(${currentArticle.imageSrc})`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          borderRadius: '10px',
-          height: '637px',
-          mb: '77px',
-          '@media (max-width:1080px)': {
-            height: '500px',
-          },
-          '@media (max-width:900px)': {
-            height: '400px',
-          },
-          '@media (max-width:600px)': {
-            mb: '56px',
-            height: '293px',
-          },
-        }}
-      ></Box>
+      <ArticleImage src={currentArticle.imageSrc} />
       <Stack
         alignItems="center"
         width="100%"

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import Stack, { StackProps } from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { CustonMuiIcon } from '@/mui/muiCustomIcon';
+import { CustomMuiIcon } from '@/mui/muiCustomIcon';
 import { ButtonMore } from '@/components/Button/ButtonMore/ButtonMore';
 
 import { ServiceData } from '@/shared/serviceData/service.data';
@@ -82,7 +82,7 @@ export const ServiceCard = ({
         {service.shortDescription}
       </Typography>
       {icon && (
-        <CustonMuiIcon
+        <CustomMuiIcon
           type={service.commonImageType}
           size={
             windowInnerWidth > 900 ? service.imageSizeS : service.imageSizeXS
@@ -95,7 +95,7 @@ export const ServiceCard = ({
               maxHeight: '141px',
             },
           }}
-        ></CustonMuiIcon>
+        ></CustomMuiIcon>
       )}
       <ButtonMore
         text="Узнать больше"
